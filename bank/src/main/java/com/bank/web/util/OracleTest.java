@@ -12,22 +12,19 @@ public class OracleTest {
 		ResultSet rs = null;
 		
 		try {
-			System.out.println("dd");
 			Class.forName(Constants.ORACLE_DRIVER);
-			System.out.println("17");
 			conn = DriverManager.getConnection(
 					Constants.ORACLE_URL,
 					Constants.ORACLE_ID,
 					Constants.ORACLE_PASS
 					);
 			stmt = conn.createStatement();
-			System.out.println("23");
-			rs = stmt.executeQuery("SELECT * FROM test");
+			rs = stmt.executeQuery("SELECT * FROM employees");
 			String name = null;
 			while(rs.next()){
-				name = rs.getString("name");
+				name = rs.getString("EMAIL");
 			}
-			System.out.println("이름 :"+ name);
+			System.out.println("이메일 :"+ name);
 					
 		} catch (Exception e) {
 			System.out.println("ddddd");
