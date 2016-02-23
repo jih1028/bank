@@ -24,21 +24,14 @@ public class HomeController {
    
    private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
    
-   @Autowired MemberVO member;
-   
-   @Autowired MemberServiceImple service;
+
    
    @RequestMapping(value = "/", method = RequestMethod.GET)
    public String home(Locale locale, Model model) {
       logger.info("Welcome home! The client locale is {}.", locale);
       
       
-      member.setUserid("kim");
-      member.setPassword("1");
-      member=service.login(member);
-      System.out.println("로그인 후 이름: " +member.getName());
-      model.addAttribute("name",member.getName());
-      
+     
       return "global/home";
    }
    
