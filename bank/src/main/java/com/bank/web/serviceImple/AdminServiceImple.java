@@ -1,18 +1,20 @@
 package com.bank.web.serviceImple;
 
-import com.bank.web.domain.AccountBean;
-import com.bank.web.service.AdminService;
+import org.springframework.stereotype.Service;
 
+import com.bank.web.domain.AccountVO;
+import com.bank.web.service.AdminService;
+@Service
 public class AdminServiceImple implements AdminService{
 
 	private int count = 0; //멤버변수지만 초기값이 필요한 경우에는 줄 수 있다.
 
-	private AccountBean[] accountList;
+	private AccountVO[] accountList;
 
 	
-	
+	public AdminServiceImple(){}
 	public AdminServiceImple(int count) {
-		accountList = new AccountBean[count];
+		accountList = new AccountVO[count];
 	}
 
 	@Override
@@ -22,7 +24,7 @@ public class AdminServiceImple implements AdminService{
 		// 나중에 추가되는 값을 오버라이딩 하게 된다.
 		// 추가되는 개념으로 코딩하려면 지역변수로 쳐리하고
 		// 자료구조를 필드에 선언해야 한다.
-		accountList[count] = new AccountBean();
+		accountList[count] = new AccountVO();
 		accountList[count].setName(name);
 		accountList[count].setPassword(password);
 		
@@ -36,9 +38,9 @@ public class AdminServiceImple implements AdminService{
 	}
 
 	@Override
-	public AccountBean searchAccountByAccountNo(int accountNo) {
+	public AccountVO searchAccountByAccountNo(int accountNo) {
 		//2. 계좌번호로 해당 계좌 정보 조회
-		AccountBean account = null;
+		AccountVO account = null;
 		// 이 라인에서 account 는 인스턴스 개념이 아니라
 		// 리턴을 받은 타입의 변수이다.
 		for (int i = 0; i < this.getCount(); i++) {
@@ -51,12 +53,12 @@ public class AdminServiceImple implements AdminService{
 	}
 
 	@Override
-	public AccountBean[] searchAccountByName(String name) {
+	public AccountVO[] searchAccountByName(String name) {
 		//3. 이름으로 계좌 정보 조회
-		AccountBean[] tempAccount = null;
+		AccountVO[] tempAccount = null;
 		int j=0;
 		int tempCount = this.searchCountByName(name);
-		AccountBean[] tempList = new AccountBean[tempCount];
+		AccountVO[] tempList = new AccountVO[tempCount];
 		for (int i = 0; i < this.getCount(); i++) {
 			if(name.equals(accountList[i].getName())){
 				tempList[j] = accountList[i];
@@ -77,7 +79,7 @@ public class AdminServiceImple implements AdminService{
 		//입력한 계좌가 존재하지 않을 경우 if문 처리
 		//전체 리스트 count값 줄여줘야댐
 		String result ="";
-		AccountBean account = null;
+		AccountVO account = null;
 		// 이 라인에서 account 는 인스턴스 개념이 아니라
 		// 리턴을 받은 타입의 변수이다.
 		if(this.searchAccountByAccountNo(accountNo) != null){

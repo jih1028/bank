@@ -2,15 +2,19 @@ package com.bank.web.serviceImple;
 
 import java.util.Scanner;
 
-import com.bank.web.domain.AccountBean;
+import org.springframework.stereotype.Service;
+
+import com.bank.web.domain.AccountVO;
 import com.bank.web.service.AccountService;
 
+@Service
 public class AccountServiceImple implements AccountService{
 	
-	AccountBean account;
+	AccountVO account;
 	
 	public AccountServiceImple() {
-		account = new AccountBean();
+		account = new AccountVO();
+		
 	}
 
 	@Override

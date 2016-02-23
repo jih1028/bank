@@ -2,11 +2,13 @@ package com.bank.web.controller;
 
 import java.util.Scanner;
 
-import com.bank.web.domain.MemberBean;
+import org.springframework.stereotype.Controller;
+
+import com.bank.web.domain.MemberVO;
 import com.bank.web.service.MemberService;
 import com.bank.web.serviceImple.MemberServiceImple;
 
-
+@Controller
 public class MemberController {
 	public static void main(String[] args) {
 
@@ -26,7 +28,7 @@ public class MemberController {
 			
 			switch (scanner.nextInt()) {
 			case 1:
-				  MemberBean tempBean = new MemberBean();
+				  MemberVO tempBean = new MemberVO();
 				  System.out.println("ID를 입력하세요");
 				  tempBean.setUserid(scanner.next());
 				  System.out.println("이름을 입력하세요");
@@ -47,7 +49,7 @@ public class MemberController {
 				break;
 			case 3:
 				System.out.println("이름? ");
-				MemberBean[] member = MemberService.searchByName(scanner.next());
+				MemberVO[] member = MemberService.searchByName(scanner.next());
 				for (int i = 0; i < member.length; i++) {
 					System.out.println(member[i]);
 				}

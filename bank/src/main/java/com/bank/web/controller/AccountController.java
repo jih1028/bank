@@ -2,9 +2,11 @@ package com.bank.web.controller;
 
 import java.util.Scanner;
 
+import org.springframework.stereotype.Controller;
+
 import com.bank.web.service.AccountService;
 import com.bank.web.serviceImple.AccountServiceImple;
-
+@Controller
 public class AccountController {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);

@@ -14,5 +14,5 @@ public interface AccountService {
 	public String withdraw(int money);
 	// 4. 조회
 	public String search();
-		
+	public String deposit(int money);	
 }
