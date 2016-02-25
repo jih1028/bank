@@ -4,6 +4,11 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
  <mapper namespace="com.bank.web.mapper.AccountMapper">
- 
- 
+ 	<select id="selectAccount" resultType="com.bank.web.domain.AccountVO" 
+    parameterType="com.bank.web.domain.AccountVO">
+ 		select a.ACCOUNTNO, a.MONEY, a.PASSWORD
+		from   ACCOUNT a,MEMBER m
+		where  a.USERID = m.USERID
+		and    m.USERID = #{userid}
+ 	</select>
  </mapper>

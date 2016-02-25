@@ -14,14 +14,27 @@
 	accountNo NUMBER,
 	money NUMBER,
 	password NUMBER,
+	userid VARCHAR2(30)
+	);
+	
+	CREATE TABLE account2(
+	seq NUMBER PRIMARY KEY,
+	accountNo NUMBER,
+	money NUMBER,
+	password NUMBER,
 	userid VARCHAR2(30),
 	CONSTRAINT account_member_fk
 	FOREIGN KEY(userid)
 	REFERENCES member(userid)
 	);
+	
+select a.ACCOUNTNO, a.MONEY, a.PASSWORD, a.USERID
+from   ACCOUNT a,MEMBER m
+where  a.USERID = m.USERID;
+	
 select * from account;
-INSERT INTO account VALUES (seq.NEXTVAL,1000,1000,10000,'kim');
-INSERT INTO account VALUES (seq.NEXTVAL,1001,1001,20000,'lee');
-INSERT INTO account VALUES (seq.NEXTVAL,1002,1002,50000,'kang');
+INSERT INTO account VALUES (seq.NEXTVAL,1000,1000,1,'kim');
+INSERT INTO account VALUES (seq.NEXTVAL,1001,1001,1,'lee');
+INSERT INTO account VALUES (seq.NEXTVAL,1002,1002,1,'kang');
 
 select * from member;

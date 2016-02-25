@@ -2,15 +2,20 @@ package com.bank.web.serviceImple;
 
 import java.util.Scanner;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bank.web.domain.AccountVO;
+import com.bank.web.mapper.AccountMapper;
+import com.bank.web.mapper.MemberMapper;
 import com.bank.web.service.AccountService;
 
 @Service
 public class AccountServiceImple implements AccountService{
 	
 	AccountVO account;
+	@Autowired private SqlSession sqlSession;	
 	
 	public AccountServiceImple() {
 		account = new AccountVO();
@@ -58,6 +63,14 @@ public class AccountServiceImple implements AccountService{
 	public String search() {
 		// 4. 조회
 		return account.toString();
+	}
+	@Override
+	public AccountVO getAccount(String userid) {
+		// TODO Auto-generated method stub
+		AccountVO temp = new AccountVO();
+		 AccountMapper mapper = sqlSession.getMapper(AccountMapper.class);
+		 temp = mapper.selectAccount(userid);
+		return temp;
 	}
 
 

@@ -27,14 +27,16 @@ public class MemberServiceImple implements MemberService{
 	
 	public MemberServiceImple() {
 	}
+//여기서MemberMapper.xml 부른다
 
 
-
-	public String join(MemberVO member) {
+		public int join(MemberVO member) {
 		// 회원가입
 
-		map.put(member.getUserid(), member);
-		return member.getName() + "회원가입을 축하드립니다";
+		  MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+	      int result = mapper.insertMember(member);
+
+	      return result;
 		
 		/*
 		memberList[count] = new MemberBean();
@@ -82,8 +84,12 @@ public class MemberServiceImple implements MemberService{
 	}
 
 
-	public String remove(String id) {
-		String result ="";
+	public int remove(String userid) {
+		
+		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+	     return mapper.deleteMember(userid);
+		
+		
 		/*
 		for (int i = 0; i < this.getCount(); i++) {
 			if(id.equals(memberList[i].getUserid()) ){
@@ -99,7 +105,7 @@ public class MemberServiceImple implements MemberService{
 		}	
 		return result;*/
 		
-		return map.remove(id)  != null ? "탈퇴 성공" : "탈퇴 실패";
+		//return map.remove(id)  != null ? "탈퇴 성공" : "탈퇴 실패";
 		
 		
 	}
@@ -126,29 +132,29 @@ public class MemberServiceImple implements MemberService{
 	@Override
 	   public MemberVO login(MemberVO member) {
 	      // 로그인
-	      MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		  MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
 	      member = mapper.selectMember(member);
 
 	      return member;
 	   }
 
 	@Override
-	public String update(MemberVO member) {
-		// 정보수정
-		
-		String result = "업데이트 실패";
-		map.replace(member.getUserid(), member);
-		
-		/*
-		for (int i = 0; i < map.size(); i++) {
-			(map.get(i)).setName(member.getName());
-			(map.get(i)).setUserid(member.getUserid());
-			(map.get(i)).setPassword(member.getPassword());
-			(map.get(i)).setAddr(member.getAddr());
-			(map.get(i)).setBirth(member.getBirth());		
-		}
-		*/
-		return "업데이트 성공";
-	}
+	   public int update(MemberVO member) {
+	      // 업데이트
+	      //map.replace(member.getUserid(), member);
+		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);  
+		int result = mapper.update(member);
+
+	    return result;
+	   }
+
+	@Override
+	   public String existCheck(String userid) {
+	      // TODO Auto-generated method stub
+	     
+	         MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+	         return mapper.selectUserid(userid);
+	   }
+	
 
 }

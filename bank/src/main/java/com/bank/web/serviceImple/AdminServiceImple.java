@@ -120,5 +120,6 @@ public class AdminServiceImple implements AdminService{
 	public void setCount(int count) {
 		this.count = count;
 	}
+	
 
 }
